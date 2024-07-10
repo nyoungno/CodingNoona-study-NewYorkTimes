@@ -4,7 +4,7 @@ const getLatestNews = async () => {
   //   const url = new URL(
   //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
   //   );
-  let url = `https://knn-newyorktimes.netlify.app/top-headlines`;
+  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
   const response = await fetch(url);
   const data = await response.json();
   news = data.articles;
