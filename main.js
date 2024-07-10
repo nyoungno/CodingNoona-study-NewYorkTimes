@@ -1,10 +1,10 @@
-const API_KEY = `d87115fdbe2240cb8187821a25a1fe4b`;
+// const API_KEY = `d87115fdbe2240cb8187821a25a1fe4b`;
 let newsList = [];
 const getLatestNews = async () => {
-  const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
-  );
-  // let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
+  // const url = new URL(
+  //   `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
+  // );
+  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
   const response = await fetch(url);
   const data = await response.json();
   newsList = data.articles;
@@ -67,16 +67,3 @@ const openSearchBox = () => {
     inputArea.style.display = "inline";
   }
 };
-
-function checkWidth() {
-  var icon = document.getElementById("icon");
-  if (window.innerWidth <= 1024) {
-    icon.style.display = "none"; // 화면 너비가 1024px 이하일 때 아이콘 숨기기
-  } else {
-    icon.style.display = "inline-block"; // 화면 너비가 1024px 초과일 때 아이콘 보이기
-  }
-}
-
-// 페이지 로드시와 화면 크기 변경 시에도 체크
-window.onload = checkWidth;
-window.onresize = checkWidth;
