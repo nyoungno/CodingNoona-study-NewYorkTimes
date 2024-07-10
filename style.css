@@ -2,6 +2,10 @@
   display: none;
 }
 
+.input-sm-area {
+  text-align: center;
+}
+
 .head-line {
   margin-top: 1em;
   display: flex;
@@ -84,7 +88,7 @@
 .icon-box {
   padding-top: 4px;
   display: flex;
-  flex-direction: row;
+  justify-content: flex-start;
   gap: 3px;
 }
 
@@ -118,13 +122,46 @@
   width: 416px;
   max-height: 250px;
   height: 250px;
+  object-fit: cover;
+}
+
+.head-sm-line {
+  display: flex;
+  justify-content: center;
+  padding-top: 20;
+  position: absolute;
+}
+
+.head-sm-line svg {
+  height: 40px;
 }
 
 @media screen and (max-width: 1024px) {
-  .icon-button {
+  .fa-bars {
     display: inline !important; /* 필요에 따라 !important를 사용하여 우선순위를 높일 수 있습니다. */
+    /*fas에 inline-block이 우선순위로 고정되어 있어 직접적으로 html에 display:none을 주고 미디워 쿼리로 변경  */
+  }
+  .fa-search {
+    display: none !important;
   }
   .menus {
     display: none;
+  }
+  .head-line {
+    margin-bottom: 1em;
+  }
+  .header-box {
+    position: relative;
+    border-top: 1px solid rgb(236, 236, 236);
+    border-bottom: 4px double black;
+    width: 100%;
+    max-width: 100%;
+  }
+  .head-line svg {
+    height: 30px;
+  }
+  .icon-box {
+    position: absolute;
+    margin-top: 8px;
   }
 }
