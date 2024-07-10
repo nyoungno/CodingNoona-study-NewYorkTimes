@@ -2,10 +2,6 @@
   display: none;
 }
 
-.input-sm-area {
-  text-align: center;
-}
-
 .head-line {
   margin-top: 1em;
   display: flex;
@@ -88,7 +84,7 @@
 .icon-box {
   padding-top: 4px;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row;
   gap: 3px;
 }
 
@@ -125,42 +121,15 @@
   object-fit: cover;
 }
 
-.head-sm-line {
-  display: flex;
-  justify-content: center;
-  padding-top: 20;
-  position: absolute;
-}
-
-.head-sm-line svg {
-  height: 40px;
-}
-
 @media screen and (max-width: 1024px) {
-  .fa-bars {
-    display: inline !important; /* 필요에 따라 !important를 사용하여 우선순위를 높일 수 있습니다. */
-  }
-  .fa-search {
-    display: none !important;
+  .icon-button {
+    display: inline !important;
+    /* 필요에 따라 !important를 사용하여 우선순위를 높일 수 있습니다. */
   }
   .menus {
     display: none;
   }
   .head-line {
-    margin-bottom: 1em;
-  }
-  .header-box {
-    position: relative;
-    border-top: 1px solid rgb(236, 236, 236);
-    border-bottom: 4px double black;
-    width: 100%;
-    max-width: 100%;
-  }
-  .head-line svg {
-    height: 30px;
-  }
-  .icon-box {
-    position: absolute;
-    margin-top: 8px;
+    margin-bottom: 16px;
   }
 }
