@@ -134,6 +134,8 @@
   width: 35px;
   height: 32px;
   border-radius: 3px;
+  text-align: center;
+  align-items: center;
 }
 
 .news-img-size {
