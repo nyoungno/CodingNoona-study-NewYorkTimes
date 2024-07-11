@@ -73,7 +73,8 @@ const render = () => {
                       news.urlToImage || "img/Noimage.jpg"
                     }" onerror="this.onerror=null; this.src='img/Noimage.jpg';">
                 </div>
-                <div class="col-lg-8">
+                <div class="col-lg-8 article-main">
+                    <div class="title-description">
                     <h2>
                         ${news.title}
                     </h2>
@@ -86,10 +87,11 @@ const render = () => {
                         : news.description
                     }
                     </p>
-                    <div>
-                        ${news.source.name || "내용없음"} * ${moment(
+                    </div>
+                    <div class="source-moment">
+                        ${news.source.name || "알수없음"} * 입력 ${moment(
         news.publishedAt
-      ).format("LLL")}; 
+      ).format("YYYY.MM.DD. h:mm A")}
                     </div>
                 </div>
             </div>`

@@ -39,6 +39,28 @@
   border-bottom: 2px solid black;
 }
 
+.article-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.title-description {
+  padding: 4px;
+}
+
+.title-description h2 {
+  font-weight: bolder;
+}
+
+.source-moment {
+  font-size: 13px;
+  line-height: 18px;
+  color: #929294;
+  padding: 3px;
+}
+
 .side-menu {
   height: 100%;
   width: 0;
