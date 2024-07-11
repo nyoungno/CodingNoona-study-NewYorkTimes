@@ -1,15 +1,35 @@
-// const API_KEY = `d87115fdbe2240cb8187821a25a1fe4b`;
+const API_KEY = `d87115fdbe2240cb8187821a25a1fe4b`;
 let newsList = [];
+const menus1 = document.querySelectorAll(".menus button");
+const menus2 = document.querySelectorAll(".side-menu-list button");
+const menus = [...menus1, ...menus2];
+
+menus.forEach((meun) =>
+  meun.addEventListener("click", (event) => getNewsByCategory(event))
+);
 const getLatestNews = async () => {
-  // const url = new URL(
-  //   `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
-  // );
-  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
+  const url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
+  );
+  // let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
   const response = await fetch(url);
   const data = await response.json();
   newsList = data.articles;
   render();
   console.log("rrr", newsList);
+};
+
+const getNewsByCategory = async (event) => {
+  const category = event.target.textContent.toLowerCase();
+  console.log("catagory", category);
+  const url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
+  );
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log("ddd", data);
+  newsList = data.articles;
+  render();
 };
 
 const render = () => {
@@ -49,6 +69,7 @@ const render = () => {
 
 getLatestNews();
 
+// 사이드 메뉴 보이고 숨기기
 const openNav = () => {
   document.getElementById("mySidenav").style.width = "250px";
 };
