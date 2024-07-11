@@ -119,3 +119,23 @@ const openSearchBox = () => {
     inputArea.style.display = "inline";
   }
 };
+
+// 입력 필드에서 엔터 키를 눌렀을 때 검색
+const searchInput1 = document.getElementById("search-input1");
+const searchInput2 = document.getElementById("search-input2");
+
+if (searchInput1) {
+  searchInput1.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      getNewsByKeyword();
+    }
+  });
+}
+
+if (searchInput2) {
+  searchInput2.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      getNewsByKeyword();
+    }
+  });
+}
