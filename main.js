@@ -105,7 +105,7 @@ getLatestNews();
 
 // 사이드 메뉴 보이고 숨기기
 const openNav = () => {
-  document.getElementById("mySidenav").style.width = "250px";
+  document.getElementById("mySidenav").style.width = "300px";
 };
 
 const closeNav = () => {
