@@ -126,7 +126,9 @@
 }
 
 .side-input-area {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  gap: 3px;
 }
 
 @media screen and (max-width: 1024px) {
