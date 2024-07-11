@@ -37,6 +37,7 @@
 
 .news {
   border-bottom: 2px solid black;
+  padding: 4px;
 }
 
 .article-main {
@@ -47,7 +48,6 @@
 }
 
 .title-description {
-  padding: 4px;
 }
 
 .title-description h2 {
@@ -58,7 +58,6 @@
   font-size: 13px;
   line-height: 18px;
   color: #929294;
-  padding: 3px;
 }
 
 .side-menu {
