@@ -4,8 +4,7 @@
 
 .head-line {
   margin-top: 1em;
-  display: flex;
-  justify-content: center;
+  text-align: center;
 }
 
 .head-line svg {
@@ -63,7 +62,7 @@
 .side-menu .closebtn {
   position: absolute;
   top: 0;
-  right: 25px;
+  right: 8px; /* 25px */
   font-size: 36px;
   margin-left: 50px;
   border: none;
@@ -121,6 +120,14 @@
   object-fit: cover;
 }
 
+.col-lg-4 {
+  text-align: center;
+}
+
+.side-input-area {
+  text-align: center;
+}
+
 @media screen and (max-width: 1024px) {
   .icon-button {
     display: inline !important;
@@ -129,7 +136,46 @@
   .menus {
     display: none;
   }
+
   .head-line {
-    margin-bottom: 16px;
+    display: flex;
+    justify-content: space-between; /* 버거와 로고 사이의 공간을 최대화 */
+    align-items: center; /* 요소를 수직 가운데 정렬 */
+    top: 0;
+    left: 0;
+    /*padding: 1em;/*  /* 여백 추가 (필요에 따라 조정) */
+    height: 48px;
+    margin: 0px;
+    border-bottom: 4px double black;
+  }
+
+  .head-line svg {
+    width: 100%;
+  }
+
+  /* 버거 메뉴 박스 */
+  .burger-box {
+    display: flex;
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    flex: 1;
+  }
+
+  /* 로고 박스 */
+  .logo-box {
+    display: flex;
+    justify-content: center; /* 중앙 정렬 */
+    position: absolute; /* 절대 위치로 중앙에 배치 */
+    left: 50%;
+    transform: translateX(-50%);
+    height: 30px;
+  }
+
+  /* 버거 아이콘 보이도록 설정 */
+  .icon-button {
+    display: block;
+  }
+
+  .icon-box {
+    display: none;
   }
 }
