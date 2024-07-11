@@ -9,7 +9,7 @@ menus.forEach((meun) =>
 );
 const getLatestNews = async () => {
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
   );
   // let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
   const response = await fetch(url);
@@ -23,11 +23,41 @@ const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
   console.log("catagory", category);
   const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`
+    `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
   );
   const response = await fetch(url);
   const data = await response.json();
   console.log("ddd", data);
+  newsList = data.articles;
+  render();
+};
+
+const getNewsByKeyword = async () => {
+  const searchInput1 = document.getElementById("search-input1");
+  const value1 = searchInput1 ? searchInput1.value : "";
+
+  // id가 "search-input2"인 요소의 값을 가져옵니다.
+  const searchInput2 = document.getElementById("search-input2");
+  const value2 = searchInput2 ? searchInput2.value : "";
+
+  // 두 값을 합칩니다. 필요에 따라 처리 방식은 달라질 수 있습니다.
+  const keyword = `${value1} ${value2}`;
+
+  // 입력 필드의 값을 지웁니다
+  if (searchInput1) {
+    searchInput1.value = "";
+  }
+
+  if (searchInput2) {
+    searchInput2.value = "";
+  }
+  console.log("keyword", keyword);
+  const url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
+  );
+  const response = await fetch(url);
+  const data = await response.json();
+  console.log("keyword data", data);
   newsList = data.articles;
   render();
 };
