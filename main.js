@@ -1,4 +1,4 @@
-// const API_KEY = `d87115fdbe2240cb8187821a25a1fe4b`;
+const API_KEY = `d87115fdbe2240cb8187821a25a1fe4b`;
 let newsList = [];
 const menus1 = document.querySelectorAll(".menus button");
 const menus2 = document.querySelectorAll(".side-menu-list button");
@@ -8,10 +8,10 @@ menus.forEach((meun) =>
   meun.addEventListener("click", (event) => getNewsByCategory(event))
 );
 const getLatestNews = async () => {
-  // const url = new URL(
-  //   `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
-  // );
-  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
+  const url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
+  );
+  // let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
   const response = await fetch(url);
   const data = await response.json();
   newsList = data.articles;
@@ -22,10 +22,10 @@ const getLatestNews = async () => {
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
   console.log("catagory", category);
-  // const url = new URL(
-  //   `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
-  // );
-  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?category=${category}`;
+  const url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
+  );
+  // let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?category=${category}`;
   const response = await fetch(url);
   const data = await response.json();
   console.log("ddd", data);
@@ -53,10 +53,10 @@ const getNewsByKeyword = async () => {
     searchInput2.value = "";
   }
   console.log("keyword", keyword);
-  // const url = new URL(
-  //   `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
-  // );
-  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?q=${keyword}`;
+  const url = new URL(
+    `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
+  );
+  // let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?q=${keyword}`;
   const response = await fetch(url);
   const data = await response.json();
   console.log("keyword data", data);
@@ -119,6 +119,34 @@ const openSearchBox = () => {
     inputArea.style.display = "inline";
   }
 };
+
+// 창 크기 변경 감지를 위한 이벤트 리스너 추가
+window.addEventListener("resize", () => {
+  // 현재 화면 폭 가져오기
+  let windowWidth = window.innerWidth;
+
+  // 화면 폭이 작아질 경우 검색창 닫기
+  if (windowWidth <= 1024) {
+    document.getElementById("input-area").style.display = "none";
+  }
+});
+
+// 사이드 메뉴를 닫는 함수
+const closeSideMenu = () => {
+  document.getElementById("mySidenav").style.width = "0";
+};
+
+// 창 크기 변경 감지를 위한 이벤트 리스너 추가
+window.addEventListener("resize", () => {
+  // 현재 화면 너비 가져오기
+  let windowWidth = window.innerWidth;
+
+  // 화면 너비가 커질 경우 사이드 메뉴 닫기
+  if (windowWidth > 1024) {
+    // 예시로 1024px 이상일 때 사이드 메뉴 닫힘
+    closeSideMenu();
+  }
+});
 
 // 입력 필드에서 엔터 키를 눌렀을 때 검색
 const searchInput1 = document.getElementById("search-input1");
