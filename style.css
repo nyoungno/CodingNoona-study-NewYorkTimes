@@ -84,6 +84,7 @@
   padding-top: 4px;
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 3px;
 }
 
