@@ -1,4 +1,4 @@
-const API_KEY = `d87115fdbe2240cb8187821a25a1fe4b`;
+// const API_KEY = `d87115fdbe2240cb8187821a25a1fe4b`;
 let newsList = [];
 const menus1 = document.querySelectorAll(".menus button");
 const menus2 = document.querySelectorAll(".side-menu-list button");
@@ -8,10 +8,10 @@ menus.forEach((meun) =>
   meun.addEventListener("click", (event) => getNewsByCategory(event))
 );
 const getLatestNews = async () => {
-  const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
-  );
-  // let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
+  // const url = new URL(
+  //   `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
+  // );
+  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
   const response = await fetch(url);
   const data = await response.json();
   newsList = data.articles;
@@ -22,9 +22,10 @@ const getLatestNews = async () => {
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
   console.log("catagory", category);
-  const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
-  );
+  // const url = new URL(
+  //   `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
+  // );
+  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?category=${category}`;
   const response = await fetch(url);
   const data = await response.json();
   console.log("ddd", data);
@@ -52,9 +53,10 @@ const getNewsByKeyword = async () => {
     searchInput2.value = "";
   }
   console.log("keyword", keyword);
-  const url = new URL(
-    `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
-  );
+  // const url = new URL(
+  //   `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
+  // );
+  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?q=${keyword}`;
   const response = await fetch(url);
   const data = await response.json();
   console.log("keyword data", data);
