@@ -7,30 +7,33 @@ const menus = [...menus1, ...menus2];
 menus.forEach((meun) =>
   meun.addEventListener("click", (event) => getNewsByCategory(event))
 );
-const getLatestNews = async () => {
-  // const url = new URL(
-  //   `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
-  // );
-  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
+
+// let url = new URL(
+//   `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
+// );
+
+const fetchNews = async (url) => {
   const response = await fetch(url);
   const data = await response.json();
   newsList = data.articles;
   render();
-  console.log("rrr", newsList);
+};
+
+const getLatestNews = async () => {
+  // url = new URL(
+  //   `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
+  // );
+  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
+  await fetchNews(url);
 };
 
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
-  console.log("catagory", category);
-  // const url = new URL(
+  // url = new URL(
   //   `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
   // );
   let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?category=${category}`;
-  const response = await fetch(url);
-  const data = await response.json();
-  console.log("ddd", data);
-  newsList = data.articles;
-  render();
+  await fetchNews(url);
 };
 
 const getNewsByKeyword = async () => {
@@ -53,15 +56,11 @@ const getNewsByKeyword = async () => {
     searchInput2.value = "";
   }
   console.log("keyword", keyword);
-  // const url = new URL(
+  // url = new URL(
   //   `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
   // );
   let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?q=${keyword}`;
-  const response = await fetch(url);
-  const data = await response.json();
-  console.log("keyword data", data);
-  newsList = data.articles;
-  render();
+  await fetchNews(url);
 };
 
 const render = () => {
