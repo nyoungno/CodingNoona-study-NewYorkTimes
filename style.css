@@ -152,6 +152,10 @@
   gap: 3px;
 }
 
+.alert {
+  text-align: center;
+}
+
 @media screen and (max-width: 1024px) {
   .icon-button {
     display: inline !important;

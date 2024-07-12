@@ -4,8 +4,8 @@ const menus1 = document.querySelectorAll(".menus button");
 const menus2 = document.querySelectorAll(".side-menu-list button");
 const menus = [...menus1, ...menus2];
 
-menus.forEach((meun) =>
-  meun.addEventListener("click", (event) => getNewsByCategory(event))
+menus.forEach((menu) =>
+  menu.addEventListener("click", (event) => getNewsByCategory(event))
 );
 
 // let url = new URL(
@@ -13,10 +13,21 @@ menus.forEach((meun) =>
 // );
 
 const fetchNews = async (url) => {
-  const response = await fetch(url);
-  const data = await response.json();
-  newsList = data.articles;
-  render();
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    if (response.status === 200) {
+      if (data.articles.length === 0) {
+        throw new Error("검색 결과가 없습니다.");
+      }
+      newsList = data.articles;
+      render();
+    } else {
+      throw new Error(data.message);
+    }
+  } catch (error) {
+    errorRender(error.message);
+  }
 };
 
 const getLatestNews = async () => {
@@ -98,6 +109,13 @@ const render = () => {
     .join("");
 
   document.getElementById("news-board").innerHTML = newsHTML;
+};
+
+const errorRender = (errorMessage) => {
+  const errorHTML = `<div class="alert alert-danger" role="alert">
+  ${errorMessage}
+</div>`;
+  document.getElementById("news-board").innerHTML = errorHTML;
 };
 
 getLatestNews();
