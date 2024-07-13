@@ -9,6 +9,7 @@
 
 .head-line svg {
   width: 430px;
+  cursor: pointer;
 }
 
 .menus {
@@ -25,9 +26,15 @@
   background: none;
   margin: 5px;
 }
+.menus button.active {
+  background-color: beige;
+  color: black;
+  border-radius: 5px;
+}
 
 .menus button:hover {
   background-color: beige;
+  border-radius: 5px;
 }
 
 .news-img-size {
@@ -80,6 +87,12 @@
   width: 120px;
 }
 
+.side-menu-list button.active {
+  background-color: beige;
+  color: black;
+  border-radius: 5px;
+}
+
 .side-menu .closebtn {
   position: absolute;
   top: 0;
@@ -98,7 +111,7 @@
 
 .side-menu-list button:hover {
   background-color: beige;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 .icon-box {
@@ -154,6 +167,23 @@
 
 .alert {
   text-align: center;
+}
+
+.pagination {
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  --bs-pagination-hover-color: black;
+}
+.page-link {
+  color: black;
+}
+.active > .page-link,
+.page-link.active {
+  background-color: black;
+  border-color: black;
 }
 
 @media screen and (max-width: 1024px) {

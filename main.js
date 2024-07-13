@@ -7,13 +7,22 @@ const menus = [...menus1, ...menus2];
 menus.forEach((menu) =>
   menu.addEventListener("click", (event) => getNewsByCategory(event))
 );
-
+let url = new URL(
+  `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr`
+);
 // let url = new URL(
 //   `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
 // );
 
-const fetchNews = async (url) => {
+let totalResults = 0;
+let page = 1;
+const pageSize = 10;
+const groupSize = 5;
+
+const fetchNews = async () => {
   try {
+    url.searchParams.set("page", page);
+    url.searchParams.set("pageSize", pageSize);
     const response = await fetch(url);
     const data = await response.json();
     if (response.status === 200) {
@@ -21,30 +30,41 @@ const fetchNews = async (url) => {
         throw new Error("검색 결과가 없습니다.");
       }
       newsList = data.articles;
+      totalResults = data.totalResults;
       render();
+      paginationRender();
     } else {
       throw new Error(data.message);
     }
   } catch (error) {
     errorRender(error.message);
+    document.querySelector(".pagination").innerHTML = ""; // 검색 결과가 없을 시 페이지네이션이 사라짐
   }
 };
 
 const getLatestNews = async () => {
+  page = 1;
   // url = new URL(
   //   `https://newsapi.org/v2/top-headlines?country=kr&apiKey=${API_KEY}`
   // );
-  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines`;
-  await fetchNews(url);
+  url = new URL(
+    `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr`
+  );
+  await fetchNews();
 };
 
 const getNewsByCategory = async (event) => {
   const category = event.target.textContent.toLowerCase();
+
+  page = 1;
   // url = new URL(
   //   `https://newsapi.org/v2/top-headlines?country=kr&category=${category}&apiKey=${API_KEY}`
   // );
-  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?category=${category}`;
-  await fetchNews(url);
+  url = new URL(
+    `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr&category=${category}`
+  );
+
+  await fetchNews();
 };
 
 const getNewsByKeyword = async () => {
@@ -66,12 +86,18 @@ const getNewsByKeyword = async () => {
   if (searchInput2) {
     searchInput2.value = "";
   }
+  page = 1;
   console.log("keyword", keyword);
   // url = new URL(
   //   `https://newsapi.org/v2/top-headlines?country=kr&q=${keyword}&apiKey=${API_KEY}`
   // );
-  let url = `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?q=${keyword}`;
-  await fetchNews(url);
+  url = new URL(
+    `https://noona-times-be-5ca9402f90d9.herokuapp.com/top-headlines?country=kr&q=${keyword}`
+  );
+  page = 1;
+  // 검색할 때 모든 메뉴 버튼에서 active 클래스를 제거합니다.
+  menus.forEach((menu) => menu.classList.remove("active"));
+  await fetchNews();
 };
 
 const render = () => {
@@ -118,6 +144,48 @@ const errorRender = (errorMessage) => {
   document.getElementById("news-board").innerHTML = errorHTML;
 };
 
+const paginationRender = () => {
+  const pageGroup = Math.ceil(page / groupSize);
+  const totalPages = Math.ceil(totalResults / pageSize);
+  let lastPage = pageGroup * 5;
+  if (lastPage > totalPages) {
+    lastPage = totalPages;
+  }
+  const firstPage = lastPage - 4 <= 0 ? 1 : lastPage - 4;
+
+  let paginationHTML = ``;
+
+  if (page > 1) {
+    paginationHTML = `<li class="page-item" onclick="moveToPage(1)">
+  <a class="page-link">&lt;&lt;</a>
+  </li>
+  <li class="page-item" onclick="moveToPage(${
+    page - 1
+  })"><a class="page-link">&lt;</a></li>`;
+  }
+
+  for (let i = firstPage; i <= lastPage; i++) {
+    paginationHTML += `<li class="page-item ${
+      i === page ? "active" : ""
+    }" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
+  }
+
+  if (page < totalPages) {
+    paginationHTML += `<li class="page-item" onclick="moveToPage(${
+      page + 1
+    })"><a class="page-link">&gt</a></li>
+  <li class="page-item" onclick="moveToPage(${totalPages})">
+                        <a class="page-link">&gt;&gt;</a>
+                       </li>`;
+  }
+
+  document.querySelector(".pagination").innerHTML = paginationHTML;
+};
+
+const moveToPage = (pageNum) => {
+  page = pageNum;
+  fetchNews(url);
+};
 getLatestNews();
 
 // 사이드 메뉴 보이고 숨기기
@@ -186,3 +254,60 @@ if (searchInput2) {
     }
   });
 }
+
+//logo 클릭시 첫화면으로
+const headLine = document.querySelector(".logo-box svg");
+headLine.addEventListener("click", function (event) {
+  getLatestNews();
+  menus.forEach((menu) => menu.classList.remove("active"));
+});
+
+//메인 메뉴(menus)와 사이드 메뉴(side-menu-list)가 동시에 호버 스타일이 유지
+menus.forEach((menu) => {
+  menu.addEventListener("mouseenter", () => {
+    menu.classList.add("hover");
+    const correspondingSideMenu = document.querySelector(
+      `.side-menu-list button[data-category="${menu.getAttribute(
+        "data-category"
+      )}"]`
+    );
+    if (correspondingSideMenu) {
+      correspondingSideMenu.classList.add("hover");
+    }
+  });
+
+  menu.addEventListener("mouseleave", () => {
+    menu.classList.remove("hover");
+    const correspondingSideMenu = document.querySelector(
+      `.side-menu-list button[data-category="${menu.getAttribute(
+        "data-category"
+      )}"]`
+    );
+    if (correspondingSideMenu) {
+      correspondingSideMenu.classList.remove("hover");
+    }
+  });
+
+  // 클릭 시 active 클래스 추가
+  menu.addEventListener("click", (event) => {
+    const category = event.target.getAttribute("data-category");
+    menus.forEach((m) => {
+      if (m.getAttribute("data-category") === category) {
+        m.classList.add("active");
+      } else {
+        m.classList.remove("active");
+      }
+    });
+
+    sideMenus.forEach((sm) => {
+      if (sm.getAttribute("data-category") === category) {
+        sm.classList.add("active");
+      } else {
+        sm.classList.remove("active");
+      }
+    });
+
+    // API 호출 등 원하는 기능 실행
+    getNewsByCategory(event);
+  });
+});
