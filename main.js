@@ -313,32 +313,3 @@ menus.forEach((menu) => {
     getNewsByCategory(event);
   });
 });
-
-//로딩 스피너를 사용하면 사용자가 페이지가 로드 중임을 알 수 있음
-document.addEventListener("DOMContentLoaded", function () {
-  // API 요청 또는 기타 초기화 작업을 수행합니다.
-  fetch("api/endpoint")
-    .then((response) => response.json())
-    .then((data) => {
-      // 메인 컨텐츠 렌더링
-      document.getElementById("main-content").innerHTML =
-        renderMainContent(data);
-
-      // 로딩 스피너 숨기기
-      document.getElementById("spinner").style.display = "none";
-
-      // 메인 컨텐츠와 푸터 표시
-      document.getElementById("main-content").style.display = "block";
-      document.getElementById("footer").style.display = "block";
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-
-      // 로딩 스피너 숨기기 및 오류 메시지 표시
-      document.getElementById("spinner").style.display = "none";
-      document.getElementById("main-content").innerHTML =
-        "<p>Failed to load content.</p>";
-      document.getElementById("main-content").style.display = "block";
-      document.getElementById("footer").style.display = "block";
-    });
-});

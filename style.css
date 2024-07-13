@@ -210,7 +210,7 @@ h2 > a:hover {
   border-color: black;
 }
 
-.footer-box {
+footer {
   height: 8rem;
   background-color: #222;
   color: white;
@@ -218,37 +218,8 @@ h2 > a:hover {
   justify-content: center;
   align-items: center;
 }
-
-/* 로딩 스피너 스타일 */
-.spinner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #3498db;
-  border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 2s linear infinite;
-}
-
-.center-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding-top: 4rem;
-  text-align: center;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+#news-board {
+  min-height: 80vh;
 }
 
 @media screen and (max-width: 1024px) {
@@ -300,5 +271,37 @@ h2 > a:hover {
 
   .icon-box {
     display: none;
+  }
+}
+
+/* 로딩 스피너 스타일 */
+.spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-top: 4rem;
+  text-align: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
