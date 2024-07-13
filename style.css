@@ -192,13 +192,24 @@ h2 > a:hover {
   margin-bottom: 50px;
   --bs-pagination-hover-color: black;
 }
+
 .page-link {
   color: black;
 }
+
 .active > .page-link,
 .page-link.active {
   background-color: black;
   border-color: black;
+}
+
+footer {
+  height: 8rem;
+  background-color: #222;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 1024px) {
