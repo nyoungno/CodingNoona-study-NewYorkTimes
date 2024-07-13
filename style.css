@@ -71,7 +71,7 @@ body {
 .source-moment {
   font-size: 13px;
   line-height: 18px;
-  color: #929294;
+  color: #585454; /*#929294;*/
 }
 
 .side-menu {
