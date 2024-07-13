@@ -157,6 +157,12 @@
 
 .col-lg-4 {
   text-align: center;
+  overflow: hidden;
+}
+
+.col-lg-4 .news-img-size:hover {
+  transform: scale(1.015);
+  transition: transform 0.5s;
 }
 
 h2 > a {
