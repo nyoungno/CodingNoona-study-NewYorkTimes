@@ -3,6 +3,7 @@ let newsList = [];
 const menus1 = document.querySelectorAll(".menus button");
 const menus2 = document.querySelectorAll(".side-menu-list button");
 const menus = [...menus1, ...menus2];
+const spinner = document.querySelector(".spinner-border");
 
 menus.forEach((menu) =>
   menu.addEventListener("click", (event) => getNewsByCategory(event))
@@ -21,6 +22,8 @@ const groupSize = 5;
 
 const fetchNews = async () => {
   try {
+    // 로딩 스피너 표시
+    spinner.style.display = "block";
     url.searchParams.set("page", page);
     url.searchParams.set("pageSize", pageSize);
     const response = await fetch(url);
@@ -39,6 +42,9 @@ const fetchNews = async () => {
   } catch (error) {
     errorRender(error.message);
     document.querySelector(".pagination").innerHTML = ""; // 검색 결과가 없을 시 페이지네이션이 사라짐
+  } finally {
+    // 로딩 스피너 숨김
+    spinner.style.display = "none";
   }
 };
 
