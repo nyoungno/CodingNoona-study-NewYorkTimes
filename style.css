@@ -158,6 +158,16 @@
 .col-lg-4 {
   text-align: center;
 }
+.title-items {
+}
+h2 > a {
+  text-decoration: none;
+  color: black;
+}
+
+h2 > a:hover {
+  text-decoration: underline;
+}
 
 .side-input-area {
   display: flex;

@@ -112,7 +112,9 @@ const render = () => {
                 <div class="col-lg-8 article-main">
                     <div class="title-description">
                     <h2>
-                        ${news.title}
+                       <a href="${news.url}" target="blank" "title="click">${
+        news.title
+      }</a>
                     </h2>
                     <p>
                     ${
