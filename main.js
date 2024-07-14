@@ -319,3 +319,44 @@ menus.forEach((menu) => {
     getNewsByCategory(event);
   });
 });
+
+//모바일 화면시 터치로 아래로 당길때 새로고침
+document.addEventListener("DOMContentLoaded", function () {
+  let startY = 0;
+  let isRefreshing = false; // 새로고침 중인지 여부를 나타내는 변수
+  const refreshThreshold = 100; // 새로고침을 위한 최소 스크롤 거리
+
+  // touchstart 이벤트를 이용하여 초기 터치 위치를 기록
+  window.addEventListener("touchstart", handleTouchStart);
+
+  // touchmove 이벤트를 이용하여 터치가 움직일 때마다 실행
+  window.addEventListener("touchmove", handleTouchMove);
+
+  function handleTouchStart(event) {
+    startY = event.touches[0].clientY;
+  }
+
+  function handleTouchMove(event) {
+    const currentY = event.touches[0].clientY;
+    const scrollDistance = currentY - startY;
+
+    // 사용자가 아래로 당길 때 새로고침
+    if (
+      scrollDistance > refreshThreshold &&
+      window.scrollY === 0 &&
+      !isRefreshing
+    ) {
+      startRefreshing();
+    }
+  }
+
+  function startRefreshing() {
+    isRefreshing = true; // 새로고침 중으로 플래그 설정
+    document.body.classList.add("refreshing"); // body에 클래스 추가
+
+    // 1.0초 후에 페이지 새로고침
+    setTimeout(function () {
+      location.reload();
+    }, 1000);
+  }
+});

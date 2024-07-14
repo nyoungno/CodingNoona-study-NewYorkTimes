@@ -277,3 +277,20 @@ footer {
     display: none;
   }
 }
+
+#refreshMessage {
+  position: fixed;
+  top: -50px; /* 초기에 화면 밖으로 숨김 */
+  left: 0;
+  width: 100%;
+  background-color: rgb(86, 123, 149);
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  z-index: 1000; /* 다른 요소 위에 표시되도록 z-index 설정 */
+  transition: top 0.3s ease-in-out; /* 상단에서 아래로 나타나는 효과 */
+}
+
+body.refreshing #refreshMessage {
+  top: 0; /* 페이지 새로고침 시 화면 상단으로 이동 */
+}
