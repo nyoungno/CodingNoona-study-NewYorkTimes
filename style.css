@@ -222,6 +222,10 @@ footer {
   min-height: 80vh;
 }
 
+.spinner-box {
+  padding-top: 37vh;
+}
+
 @media screen and (max-width: 1024px) {
   .icon-button {
     display: inline !important;
